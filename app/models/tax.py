@@ -5,11 +5,11 @@ from datetime import datetime
 
 class User(db.Model):
     id = db.Column(mysql.BIGINT(20, unsigned=True), primary_key=True)
-    name = db.Column(mysql.VARCHAR(50), unique=False, nullable=False)
-    email = db.Column(mysql.VARCHAR(70), unique=False, nullable=False)
-    phone = db.Column(mysql.VARCHAR(20), unique=False, nullable=False)
-    gender = db.Column(db.Boolean, unique=False, nullable=False)
-    dob = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    user id = db.Column(mysql.BIGINT(20, unsigned=True, unique=True, nullabe=False))
+    year = db.Column(mysql.VARCHAR(70), unique=False, nullable=False)
+    collected_at_souce = db.Column(mysql.VARCHAR(20), unique=False, nullable=False)
+    advance_paid = db.Column(db.Boolean, unique=False, nullable=False)
+    adjustment = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     address = db.Column(mysql.VARCHAR(512), unique=False, nullable=False)
     is_ff = db.Column(db.Boolean, unique=False, nullable=False)
     is_disabled = db.Column(db.Boolean, unique=False, nullable=False)

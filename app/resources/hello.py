@@ -4,5 +4,5 @@ from app.models.user import User
 
 class Hello(Resource):
     def get(self):
-        User("jamil")
+        User("1969")
         return {'Hello': 'World'}
