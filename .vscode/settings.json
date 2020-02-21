@@ -1,6 +1,11 @@
 {
-    "python.pythonPath": "/home/nsssayom/Desktop/tax_api/env/bin/python3.7",
-    "python.linting.pylintEnabled": true,
+    "python.pythonPath": "env/bin/python",
+    "python.linting.pylintEnabled": false,
     "python.linting.enabled": true,
-    "python.linting.banditEnabled": false
+    "python.linting.banditEnabled": false,
+    "python.linting.pylintArgs": [
+        "--load-plugins",
+        "pylint-flask"
+    ],
+    "python.linting.flake8Enabled": true
 }
