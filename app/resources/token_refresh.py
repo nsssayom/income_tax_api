@@ -1,19 +1,13 @@
-from flask_restful import Resource, request, abort
-from app.models.user_test import User_Test
-from app import db
+from flask_restful import Resource  # , request, abort
+# from app.models.user_test import User_Test
+# from app import db
+from flask_jwt_extended import jwt_refresh_token_required, \
+    get_jwt_identity, create_access_token
 
 
 class Token_Refresh(Resource):
+    @jwt_refresh_token_required
     def post(self):
-        username = request.json.get('username')
-        password = request.json.get('password')
-
-        if username is None or password is None:
-            abort(400)
-        if User_Test.query.filter_by(name=username).first() is not None:
-            return "Error"
-        user = User_Test(name=username)
-        user.hash_password(password)
-        db.session.add(user)
-        db.session.commit()
-        return username
+        current_user = get_jwt_identity()
+        access_token = create_access_token(identity=current_user)
+        return access_token

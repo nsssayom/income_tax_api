@@ -1,19 +1,27 @@
-from flask_restful import Resource, request, abort
-from app.models.user_test import User_Test
-from app import db
+from flask_restful import Resource
+from flask_jwt_extended import get_raw_jwt, jwt_required, jwt_refresh_token_required
+from app.models.revoked_token import RevokedTokenModel
 
 
-class Logout(Resource):
+class Logout_Access(Resource):
+    @jwt_required
     def post(self):
-        username = request.json.get('username')
-        password = request.json.get('password')
+        jti = get_raw_jwt()['jti']
+        try:
+            revoked_token = RevokedTokenModel(jti=jti)
+            revoked_token.add()
+            return {'message': 'Access token has been revoked'}
+        except Exception:
+            return {'message': 'Something went wrong'}, 500
 
-        if username is None or password is None:
-            abort(400)
-        if User_Test.query.filter_by(name=username).first() is not None:
-            return "Error"
-        user = User_Test(name=username)
-        user.hash_password(password)
-        db.session.add(user)
-        db.session.commit()
-        return username
+
+class Logout_Refresh(Resource):
+    @jwt_refresh_token_required
+    def post(self):
+        jti = get_raw_jwt()['jti']
+        try:
+            revoked_token = RevokedTokenModel(jti=jti)
+            revoked_token.add()
+            return {'message': 'Access token has been revoked'}
+        except Exception:
+            return {'message': 'Something went wrong'}, 500

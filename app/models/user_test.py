@@ -1,6 +1,6 @@
 from app import db
 from sqlalchemy.dialects import mysql
-from passlib.apps import custom_app_context as pwd_context
+from passlib.hash import pbkdf2_sha256 as sha256
 
 
 class User_Test(db.Model):
@@ -13,7 +13,12 @@ class User_Test(db.Model):
         self.name = name
 
     def hash_password(self, password):
-        self.password_hash = pwd_context.encrypt(password)
+        self.password_hash = sha256.hash(password)
 
-    def verify_password(self, password):
-        return pwd_context.verify(password, self.password_hash)
+    @staticmethod
+    def verify_password(password, hash):
+        return sha256.verify(password, hash)
+
+    @classmethod
+    def find_by_username(cls, username):
+        return cls.query.filter_by(name=username).first()
