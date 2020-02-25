@@ -10,4 +10,4 @@ app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db, compare_type=True)
 
-from app import models, main
+from app import main, models

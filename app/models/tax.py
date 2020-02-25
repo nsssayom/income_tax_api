@@ -5,17 +5,12 @@ from datetime import datetime
 
 class User(db.Model):
     id = db.Column(mysql.BIGINT(20, unsigned=True), primary_key=True)
-    user id = db.Column(mysql.BIGINT(20, unsigned=True, unique=True, nullabe=False))
+    user_id = db.Column(mysql.BIGINT(20, unsigned=True, unique=True, dnullabe=False))
     year = db.Column(mysql.VARCHAR(70), unique=False, nullable=False)
     collected_at_souce = db.Column(mysql.VARCHAR(20), unique=False, nullable=False)
     advance_paid = db.Column(db.Boolean, unique=False, nullable=False)
     adjustment = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    address = db.Column(mysql.VARCHAR(512), unique=False, nullable=False)
-    is_ff = db.Column(db.Boolean, unique=False, nullable=False)
-    is_disabled = db.Column(db.Boolean, unique=False, nullable=False)
-    is_parent_disabled = db.Column(db.Boolean, unique=False, nullable=False)
-    joined_on = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-
+    
     def __init__(self, name, email, phone, gender, dob, address, is_ff, is_disabled, is_parent_disabled, joined_on):
         self.name = name
         self.email = email
