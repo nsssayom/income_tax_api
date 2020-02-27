@@ -7,7 +7,6 @@ from app import jwt
 
 class Auth(Resource):
     @jwt_required
-    @jwt.token_in_blacklist_loader
     def get(self):
         current_user = get_jwt_identity()
         return current_user

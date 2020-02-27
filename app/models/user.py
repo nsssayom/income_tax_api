@@ -18,6 +18,7 @@ class User(db.Model):
     is_parent_disable = db.Column(mysql.BOOLEAN, nullable=True)
     joined_on = db.Column(
         mysql.DATETIME, server_default=db.func.current_timestamp(), nullable=True)
+    is_email_varified = db.Column(mysql.BOOLEAN, default=True)
     password_hash = db.Column(mysql.VARCHAR(255), unique=False, nullable=False)
 
     def __init__(self, name, email, phone):

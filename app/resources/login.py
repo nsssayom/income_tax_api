@@ -1,12 +1,14 @@
 from flask_restful import Resource, reqparse
-from flask import jsonify
-from app.models.user_test import User_Test
-from app import db
-from flask_jwt_extended import (create_access_token, create_refresh_token, jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
+from flask import jsonify, make_response
+from app.models.user import User
+from flask_jwt_extended import (create_access_token, create_refresh_token,
+                                jwt_required, jwt_refresh_token_required,
+                                get_jwt_identity, get_raw_jwt)
+import datetime
 
 
 parser = reqparse.RequestParser()
-parser.add_argument('username', help='This field cannot be blank',
+parser.add_argument('email', help='This field cannot be blank',
                     required=True)
 parser.add_argument('password', help='This field cannot be blank',
                     required=True)
@@ -15,17 +17,30 @@ parser.add_argument('password', help='This field cannot be blank',
 class Login(Resource):
     def post(self):
         data = parser.parse_args()
-        username = data.get('username')
+        email = data.get('email')
         password = data.get('password')
 
-        current_user = User_Test.find_by_username(username)
+        current_user = User.find_by_email(email)
 
         if not current_user:
-            return jsonify('400 Bad Request', {'code': 400})
+            return make_response(jsonify({
+                'status': 404,
+                'msg': "No account is associated with {}".format(email)
+            }), 404)
 
-        if User_Test.verify_password(password, current_user.password_hash):
-            access_token = create_access_token(identity=username)
-            refresh_token = create_refresh_token(identity=username)
-            return jsonify('200 Success', {'data': {'username': username, 'access-token': access_token, 'refresh-token': refresh_token}}, {'code': 200})
+        if User.verify_password(password, current_user.password_hash):
+            expires = datetime.timedelta(days=365)
+            access_token = create_access_token(identity=email, expires_delta=expires)
+            refresh_token = create_refresh_token(identity=email)
+            ret = {'access_token': access_token, 'refresh_token': refresh_token}
+            return make_response(jsonify({
+                'status': 200,
+                'data': ret,
+                'msg': 'Login successful'
+            }), 200)
         else:
-            return jsonify('401 Unautrorized', {'code': 401})
+            return make_response(jsonify({
+                'status': 401,
+                'data': ret,
+                'msg': 'Unauthorized request'
+            }), 401)
