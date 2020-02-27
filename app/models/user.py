@@ -1,6 +1,7 @@
 from app import db
 from sqlalchemy.dialects import mysql
 from passlib.hash import pbkdf2_sha256 as sha256
+from app import ma
 
 
 class User(db.Model):
@@ -18,7 +19,7 @@ class User(db.Model):
     is_parent_disable = db.Column(mysql.BOOLEAN, nullable=True)
     joined_on = db.Column(
         mysql.DATETIME, server_default=db.func.current_timestamp(), nullable=True)
-    is_email_varified = db.Column(mysql.BOOLEAN, default=True)
+    is_email_varified = db.Column(mysql.BOOLEAN, default=False)
     password_hash = db.Column(mysql.VARCHAR(255), unique=False, nullable=False)
 
     def __init__(self, name, email, phone):
@@ -44,3 +45,18 @@ class User(db.Model):
     @classmethod
     def find_by_phone(cls, phone):
         return cls.query.filter_by(phone=phone).first()
+
+
+class UserSchema(ma.SQLAlchemySchema):
+    class Meta:
+        model = User
+
+    name = ma.auto_field()
+    email = ma.auto_field()
+    phone = ma.auto_field()
+    gender = ma.auto_field()
+    dob = ma.auto_field()
+    address = ma.auto_field()
+    is_ff = ma.auto_field()
+    is_disable = ma.auto_field()
+    is_parent_disable = ma.auto_field()

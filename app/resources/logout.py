@@ -4,6 +4,7 @@ from flask_jwt_extended import get_raw_jwt, jwt_required, jwt_refresh_token_requ
 from app.models.revoked_token import RevokedTokenModel
 from app import jwt 
 
+
 class Logout_Access(Resource):
     @jwt_required
     @jwt.expired_token_loader

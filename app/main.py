@@ -6,6 +6,8 @@ from .resources.login import Login
 from .resources.auth import Auth
 from .resources.token_refresh import Token_Refresh
 from .resources.logout import Logout_Access, Logout_Refresh
+from .resources.personal_info import Personal_Info
+
 
 api = Api(app)
 
@@ -19,6 +21,7 @@ api.add_resource(Logout_Access, '/logout')
 api.add_resource(Logout_Refresh, '/logout/refresh')
 api.add_resource(Validate_Email, '/validate/email')
 api.add_resource(Validate_Phone, '/validate/phone')
+api.add_resource(Personal_Info, '/user/info')
 
 if __name__ == "__main__":
     app.run(debug=True)
