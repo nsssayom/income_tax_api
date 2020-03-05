@@ -1,6 +1,7 @@
 from flask_restful import Resource, reqparse
 from flask import jsonify, make_response
 from app.models.user import User
+from app.models.income import Income
 from app import db
 import re
 import phonenumbers

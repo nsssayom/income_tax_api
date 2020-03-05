@@ -1,3 +1,52 @@
 eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODI2NjAyNDIsIm5iZiI6MTU4MjY2MDI0MiwianRpIjoiOWExNGQwNDMtNTkzZi00YWYyLTlhNmYtMWI5ZTE2NzQxNjA3IiwiZXhwIjoxNTgyNjYxMTQyLCJpZGVudGl0eSI6InNyZWVqYW4iLCJmcmVzaCI6ZmFsc2UsInR5cGUiOiJhY2Nlc3MifQ.21wniHUIBPZrZDyOPlEMzyerhMjL7BkD0INCWCwgoE4
 
 eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODI2NjAyNDIsIm5iZiI6MTU4MjY2MDI0MiwianRpIjoiYjM4MWU2NGMtNDYxZS00NTBjLTlhNjktZThlMjIzM2E4ZTNiIiwiZXhwIjoxNTg1MjUyMjQyLCJpZGVudGl0eSI6InNyZWVqYW4iLCJ0eXBlIjoicmVmcmVzaCJ9.hr22t0T_Huf3obGR2XHKwcPrQdqFoTPAs4jzpiYscP0
+
+
+
+
+
+
+    # salary income methods
+    # def net_salary_income(self):
+    #     return (self.basic + self.special +
+    #             self.dearness + self.conveyance +
+    #             self.house_rent + self.medical +
+    #             self.servant + self.leave +
+    #             self.honorarium + self.over_time +
+    #             self.bonus + self.other_allowances +
+    #             self.provident_fund_contrib +
+    #             self.provident_fund_interest +
+    #             self.deemed_transport +
+    #             self.deemed_accomodation_type +
+    #             self.deemed_accomodation +
+    #             self.other_income_detail +
+    #             self.other_income)
+    
+    # TODO: Salary exemption method
+    # TODO: Salary Taxable method
+
+    # House expense methods
+    # def get_net_house_expense(self):
+    #     return (self.repair_expense + self.municipal_tax +
+    #             self.land_revenue + self.interest_on_loan +
+    #             self.insurance_premium + self.vacancy_allowance +
+    #             self.other_expense)
+
+    # def get_net_house_income(self):
+    #     return self.annual_rental_income - self.get_net_house_expense()
+
+
+# class IncomeSchema(ma.SQLAlchemySchema):
+#     class Meta:
+#         model = User
+
+#     name = ma.auto_field()
+#     email = ma.auto_field()
+#     phone = ma.auto_field()
+#     gender = ma.auto_field()
+#     dob = ma.auto_field()
+#     address = ma.auto_field()
+#     is_ff = ma.auto_field()
+#     is_disable = ma.auto_field()
+#     is_parent_disable = ma.auto_field()

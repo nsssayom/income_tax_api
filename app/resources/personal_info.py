@@ -37,8 +37,6 @@ class Personal_Info(Resource):
             user.is_disable = data.get('is_disable')
             user.is_parent_disable = data.get('is_parent_disable')
 
-            print(data.get('is_disable'))
-
             dob = data.get('dob')
             json_dob = dob.replace("'", "\"")
             dob_ = json.loads(json_dob)
@@ -64,8 +62,6 @@ class Personal_Info(Resource):
         try:
             info_schema = UserSchema()
             data = info_schema.dump(user)
-            print(data)
-        
             return make_response(jsonify({
                 'status': 200,
                 'data': data,
