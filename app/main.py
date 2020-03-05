@@ -9,6 +9,7 @@ from .resources.logout import Logout_Access, Logout_Refresh
 from .resources.personal_info import Personal_Info
 from .resources.income_info import Income_Info
 from .resources.investment_info import Investment_Info
+from .resources.tax_info import Tax_Info
 
 api = Api(app)
 
@@ -25,6 +26,7 @@ api.add_resource(Validate_Phone, '/validate/phone')
 api.add_resource(Personal_Info, '/user/info')
 api.add_resource(Income_Info, '/user/income_info')
 api.add_resource(Investment_Info, '/user/investment_info')
+api.add_resource(Tax_Info, '/user/tax_info')
 
 if __name__ == "__main__":
     app.run(debug=True)
