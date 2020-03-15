@@ -11,6 +11,7 @@ class Config(object):
     JWT_BLACKLIST_ENABLED = True
     JWT_BLACKLIST_TOKEN_CHECKS = ['access', 'refresh']
     FLASK_DEBUG = 1
+    CORS_ENABLED = True
     # Client ID:
     # 529739908096-rf6ql6jqh5brljolnvc4b232m4sdt2dp.apps.googleusercontent.com
     # Client Secret:

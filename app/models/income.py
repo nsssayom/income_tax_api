@@ -61,7 +61,6 @@ class Income(db.Model):
         return cls.query.filter_by(user_id=userid).filter_by(year=year).first()
 
     def get_total_salary_income(self):
-
         incomes = [self.basic, self.special, self.dearness, self.conveyance,
                    self.house_rent, self.medical, self.servant, self.leave,
                    self.honorarium, self.over_time, self.bonus,
@@ -69,7 +68,6 @@ class Income(db.Model):
                    self.deemed_transport, self.deemed_accomodation_type,
                    self.deemed_accomodation, self.other_income_detail,
                    self.other_income, self.other_allowances]
-
         return sum(filter(None, incomes))
 
     def get_total_other_income(self):
@@ -99,6 +97,35 @@ class Income(db.Model):
             return 0
         else:
             return (self.annual_rental_income - self.get_total_house_expense)
+
+    # Methods for Schedule-1(Salaries)
+    def get_exempted_income(self):
+        exempted = {}
+        exempted["basic"] = 0
+        exempted["special"] = 0
+        exempted["dearness"] = 0
+        exempted["conveyance"] = 30000
+        exempted["house_rent"] = min([int(self.basic * 0.5), 25000*12])
+        if (self.user.is_disable):
+            exempted["medical"] = min([int(self.basic * 0.1), 1000000])
+        else:
+            exempted["medical"] = min([int(self.basic * 0.1), 120000])
+        exempted["servant"] = 0,
+        exempted["leave"] = 0
+        exempted["honorarium"] = 0
+        exempted["over_time"] = 0
+        exempted["bonus"] = 0
+        exempted["provident_fund_contrib"] = 0
+        exempted["provident_fund_interest"] = min([int((self.basic +
+                                                        self.dearness) *
+                                                       (1/3)), 120000])  # TODO: Add another elelment
+        exempted["deemed_transport"] = 0
+        exempted["deemed_accomodation"] = 0
+        exempted["other_income_detail"] = 0
+        exempted["other_income"] = 0
+        exempted["other_allowances"] = 0
+        
+        return exempted
 
 
 class OtherIncomeSchema(ma.SQLAlchemySchema):

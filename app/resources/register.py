@@ -5,6 +5,7 @@ from app.models.income import Income
 from app import db
 import re
 import phonenumbers
+from validate_email import validate_email
 
 rergister_parser = reqparse.RequestParser()
 rergister_parser.add_argument(
@@ -99,9 +100,13 @@ class Validate_Email(Resource):
 
     @staticmethod
     def is_email_valid(email):
-        if len(email) > 7:
-            return bool(re.match("^.+@(\[?)[a-zA-Z0-9-.]+.([a-zA-Z]{2,3}|[0-9]{1,3})(]?)$", email))
-        return False
+        is_valid = validate_email(email_address=email,
+                                  check_regex=True, check_mx=False,
+                                  from_address='my@from.addr.ess',
+                                  helo_host='my.host.name',
+                                  smtp_timeout=10, dns_timeout=10,
+                                  use_blacklist=True)
+        return is_valid
 
     @staticmethod
     def is_email_available(email):

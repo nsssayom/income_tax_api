@@ -3,10 +3,12 @@ from flask_restful import Resource  # , request, abort
 # from app import db
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from app import jwt
-
+from flask import jsonify, make_response
 
 class Auth(Resource):
     @jwt_required
-    def get(self):
-        current_user = get_jwt_identity()
-        return current_user
+    def post(self):
+        return make_response(jsonify({
+                'status': 200,
+                'msg': 'Token Verified'
+            }), 200)

@@ -12,7 +12,7 @@ parser = reqparse.RequestParser()
 parser.add_argument(
     'dob', help='Date of Birth cannot be blank', required=False)
 parser.add_argument(
-    'gender', choices=('male', 'female'), help='Bad Choice for gender', required=False)
+    'gender', type=bool, choices=(True, False), help='Bad Choice for gender', required=False)
 parser.add_argument(
     'address', type=str, help='Address cannot be blank', required=False)
 parser.add_argument(
