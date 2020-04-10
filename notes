@@ -50,3 +50,8 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODI2NjAyNDIsIm5iZiI6MTU4MjY2MDI
 #     is_ff = ma.auto_field()
 #     is_disable = ma.auto_field()
 #     is_parent_disable = ma.auto_field()
+
+
+sudo apt install build-essential python-dev libmysqlclient-dev
+sudo apt-get install libssl-dev
+pip install mysqlclient

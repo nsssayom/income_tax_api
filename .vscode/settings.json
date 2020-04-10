@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "env/bin/python",
+    "python.pythonPath": "/home/nsssayom/Desktop/income_tax_api/env/bin/python3.6",
     "python.linting.pylintEnabled": false,
     "python.linting.enabled": true,
     "python.linting.banditEnabled": false,

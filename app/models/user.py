@@ -35,7 +35,7 @@ class User(db.Model):
         self.email = email
 
     def hash_password(self, password):
-        self.password_hash = sha256.hash(password)
+        self.password_hash = sha256.encrypt(password)
 
     @staticmethod
     def verify_password(password, hash):

@@ -46,7 +46,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV='/home/nsssayom/Desktop/tax_api/env'
+VIRTUAL_ENV='/home/nsssayom/Desktop/income_tax_api/env'
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

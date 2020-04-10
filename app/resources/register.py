@@ -69,7 +69,8 @@ class Register(Resource):
                 'status': 200,
                 'msg': "Registration successful"
             }), 200)
-        except Exception:
+        except Exception as e:
+            print(e)
             return make_response(jsonify({
                 'status': 400,
                 'msg': "Bad request"
@@ -80,7 +81,7 @@ class Validate_Email(Resource):
     def post(set):
         data = email_validation_parser.parse_args()
         email = data.get('email')
-
+        
         if not Validate_Email.is_email_valid(email):
             return make_response(jsonify({
                 'status': 400,
