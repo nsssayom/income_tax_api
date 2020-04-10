@@ -4,7 +4,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config(object):
-    SQLALCHEMY_DATABASE_URI = 'mysql://root:978653@localhost/income_tax'
+    SQLALCHEMY_DATABASE_URI = 'mysql://kaptai:pass0000@localhost/income_tax'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = "HELLO WORLD!!!!".encode('utf8')
     JWT_SECRET_KEY = "HELLO WORLD!!!!"
