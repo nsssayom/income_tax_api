@@ -12,6 +12,9 @@ import marshmallow
 # import phonenumbers
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
+import traceback
+import sys
+
 parser = reqparse.RequestParser()
 
 parser.add_argument('year', type=int, required=True, help="Year cannot be empty")
@@ -140,6 +143,7 @@ class Income_Info(Resource):
                 'msg': "Internal server error"
             }), 500)
 
+
     @jwt_required
     def get(self):
         current_user = get_jwt_identity()
@@ -173,8 +177,10 @@ class Income_Info(Resource):
                 'data': data,
                 'msg': "Income Information"
             }), 200)
-        except Exception:
+        except:
             return make_response(jsonify({
                 'status': 500,
-                'msg': "Internal server error"
+                'msg': traceback.format_exc()
+                # or
+                # print(sys.exc_info()[2])
             }), 500)

@@ -10,4 +10,4 @@ class Hello(Resource):
         # user.hash_password("123456")
         # db.session.add(user)
         # db.session.commit()
-        return {'msg': 'Hello World'}
+        return {'msg': 'Stay Home, World'}

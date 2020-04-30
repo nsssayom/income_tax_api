@@ -96,7 +96,7 @@ class Income(db.Model):
            (self.annual_rental_income is None):
             return 0
         else:
-            return (self.annual_rental_income - self.get_total_house_expense)
+            return (self.annual_rental_income - self.get_total_house_expense())
 
     # Methods for Schedule-1(Salaries)
     def get_exempted_income(self):

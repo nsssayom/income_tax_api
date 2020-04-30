@@ -15,17 +15,17 @@ parser = reqparse.RequestParser()
 parser.add_argument('year', type=int, required=True,
                     help="Year cannot be empty")
 
-parser.add_argument('life_insurance', type=int, required=False)
-parser.add_argument('deferred_contrib', type=int, required=False)
-parser.add_argument('provident_contrib', type=int, required=False)
-parser.add_argument('employers_provident_contrib', type=int, required=False)
-parser.add_argument('super_annuation_contrib', type=int, required=False)
-parser.add_argument('debenture_invest', type=int, required=False)
-parser.add_argument('deposit_pension_contrib', type=int, required=False)
-parser.add_argument('benevolent_fund_contrib', type=int, required=False)
-parser.add_argument('zakat_fund_contrib', type=int, required=False)
-parser.add_argument('other_investment_detail', type=str, required=False)
-parser.add_argument('other_investment', type=int, required=False)
+parser.add_argument('life_insurance', type=int, required=False, store_missing=False)
+parser.add_argument('deferred_contrib', type=int, required=False, store_missing=False)
+parser.add_argument('provident_contrib', type=int, required=False, store_missing=False)
+parser.add_argument('employers_provident_contrib', type=int, required=False, store_missing=False)
+parser.add_argument('super_annuation_contrib', type=int, required=False, store_missing=False)
+parser.add_argument('debenture_invest', type=int, required=False, store_missing=False)
+parser.add_argument('deposit_pension_contrib', type=int, required=False, store_missing=False)
+parser.add_argument('benevolent_fund_contrib', type=int, required=False, store_missing=False)
+parser.add_argument('zakat_fund_contrib', type=int, required=False, store_missing=False)
+parser.add_argument('other_investment_detail', type=str, required=False, store_missing=False)
+parser.add_argument('other_investment', type=int, required=False, store_missing=False)
 
 get_parser = reqparse.RequestParser()
 get_parser.add_argument('year', type=int, required=True,
@@ -46,28 +46,38 @@ class Investment_Info(Resource):
             db.session.add(investment_info)
             db.session.commit()
         try:
-            investment_info.life_insurance = data.get('life_insurance')
-            investment_info.deferred_contrib = data.get('deferred_contrib')
-            investment_info.provident_contrib = data.get('provident_contrib')
-            investment_info.employers_provident_contrib = data.get(
+            if 'life_insurance' in data:
+                investment_info.life_insurance = data.get('life_insurance')
+            if 'deferred_contrib' in data:
+                investment_info.deferred_contrib = data.get('deferred_contrib')
+            if 'provident_contrib' in data:
+                investment_info.provident_contrib = data.get('provident_contrib')
+            if 'employers_provident_contrib' in data:
+                investment_info.employers_provident_contrib = data.get(
                 'employers_provident_contrib')
-            investment_info.super_annuation_contrib = data.get(
+            if 'super_annuation_contrib' in data:
+                investment_info.super_annuation_contrib = data.get(
                 'super_annuation_contrib')
-            investment_info.debenture_invest = data.get('debenture_invest')
-            investment_info.deposit_pension_contrib = data.get(
+            if 'debenture_invest' in data:    
+                investment_info.debenture_invest = data.get('debenture_invest')
+            if 'deposit_pension_contrib' in data:
+                investment_info.deposit_pension_contrib = data.get(
                 'deposit_pension_contrib')
-            investment_info.benevolent_fund_contrib = data.get(
+            if 'benevolent_fund_contrib' in data:
+                investment_info.benevolent_fund_contrib = data.get(
                 'benevolent_fund_contrib')
-            investment_info.zakat_fund_contrib = data.get('zakat_fund_contrib')
-            investment_info.other_investment_detail = data.get(
+            if 'zakat_fund_contrib' in data:
+                investment_info.zakat_fund_contrib = data.get('zakat_fund_contrib')
+            if 'other_investment_detail' in data:
+                investment_info.other_investment_detail = data.get(
                 'other_investment_detail')
-            investment_info.other_investment = data.get('other_investment')
-
+            if 'other_investment' in data:
+                investment_info.other_investment = data.get('other_investment')
             db.session.commit()
 
             return make_response(jsonify({
                 'status': 200,
-                'msg': "Income Information Updated"
+                'msg': "Investment Information Updated"
             }), 200)
         except Exception:
             return make_response(jsonify({

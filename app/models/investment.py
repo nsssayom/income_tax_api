@@ -7,13 +7,13 @@ from marshmallow import fields
 
 
 class Investment(db.Model):
-    __talename__ = 'investment'
+    __tablename__ = 'investment'
     id = Column(mysql.BIGINT(unsigned=True),
                 nullable=False, primary_key=True)
     user_id = Column(mysql.BIGINT(unsigned=True),
                      db.ForeignKey('user.id'), nullable=False)
     year = Column(Integer, nullable=False)
-
+    
     # investment
     life_insurance = Column(Integer, default=0)
     deferred_contrib = Column(Integer, default=0)
